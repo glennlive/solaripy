@@ -97,12 +97,13 @@ def collect_iv_data(dut, ref, ref_min=1.5, iset_range=[], avg_cnt=1):
         sleep(0.25)
 
         # average if requested
-        i, v = 0, 0
+        i, v, r = 0, 0
         for _ in range(avg_cnt):
             i += dut.current
             v += dut.voltage
-        print(iset, i, v)
-        ret.append(dict(iset=iset, v=v/avg_cnt, i=i/avg_cnt))
+            r += ref.voltage
+        print(iset, i, v, r)
+        ret.append(dict(iset=iset, v=v/avg_cnt, i=i/avg_cnt, ref=r/avg_cnt))
     return ret
 
 
