@@ -22,9 +22,9 @@ from Array371X import Array371X
 
 # default collection settings
 DEFAULT_DUT = {"port":"/dev/ttyUSB0", "baudrate":9600, "address":0}
-DEFAULT_REF = {"port":"/dev/ttyUSB1", "baudrate":9600, "address":0}
+DEFAULT_REF = {"port":"/dev/ttyUSB1", "baudrate":9600, "address":1}
 DEFAULT_ISET_STEP = 0.01    # step size in amps
-DEFAULT_IMAX_EST = 0.150    # current in amps at ~ PP
+DEFAULT_IMAX_EST = 0.250    # current in amps at ~ PP
 DEFAULT_ISET_RANGE = np.arange(0.0, 0.3, DEFAULT_ISET_STEP)
 DEFAULT_SUN_REFERENCE = 1.50  # minimum voltage required
 
@@ -155,7 +155,7 @@ def main():
     print(args)
 
     filename = args.string_id + "." + datetime.datetime.utcnow().strftime("%Y-%m-%d-%H%M")
-    iset_range = list(np.arange(0.0, 0.3, args.istep))
+    iset_range = list(np.arange(0.0, args.estimated_imax*1.5, args.istep))
     iset_range += list(np.arange(args.estimated_imax*0.9,
                             args.estimated_imax*1.1,
                             args.estimated_imax*0.02))
